@@ -1,10 +1,10 @@
+import 'package:chat_test_app/features/chat_list/presentation/widgets/message_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../core/theme/app_assets.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_text_styles.dart';
-import 'widgets/message_divider.dart';
 import '../providers/chat_list_providers.dart';
 import 'widgets/chat_list_item.dart';
 
@@ -13,7 +13,8 @@ class ChatListScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final chats = ref.watch(chatListProvider);
+    final chats = ref.watch(filteredChatListProvider);
+    final search = ref.read(searchQueryProvider.notifier);
 
     return Scaffold(
       backgroundColor: AppColors.background,
@@ -43,6 +44,7 @@ class ChatListScreen extends ConsumerWidget {
                     const SizedBox(width: 12),
                     Expanded(
                       child: TextField(
+                        onChanged: search.set,
                         decoration: const InputDecoration(
                           hintText: 'Поиск',
                           hintStyle: AppTextStyles.search,
@@ -50,7 +52,7 @@ class ChatListScreen extends ConsumerWidget {
                           isCollapsed: true,
                         ),
                         textCapitalization: TextCapitalization.sentences,
-                        style: AppTextStyles.search,
+                        style: AppTextStyles.searchFilled,
                       ),
                     ),
                   ],
