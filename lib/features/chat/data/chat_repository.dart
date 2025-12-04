@@ -6,7 +6,7 @@ import '../../../models/message.dart';
 class ChatRepository {
   Future<Chat> getChat(String chatId) async {
     //Loading delay
-    await Future.delayed(const Duration(milliseconds: 500));
+    //await Future.delayed(const Duration(milliseconds: 500));
     return chatMocks.firstWhere((c) => c.id == chatId);
   }
 
