@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/widgets/avatar.dart';
+import '../../../core/widgets/message_divider.dart';
 import '../providers/chat_providers.dart';
 
 class ChatScreen extends ConsumerStatefulWidget {
@@ -63,6 +64,8 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
         data: (chat) {
           return Column(
             children: [
+              SizedBox(height: 10),
+              MessageDivider(),
               Expanded(
                 child: ListView.builder(
                   controller: _scroll,
