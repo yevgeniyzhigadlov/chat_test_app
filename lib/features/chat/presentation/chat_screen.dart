@@ -1,5 +1,7 @@
 import 'package:chat_test_app/core/theme/app_text_styles.dart';
+import 'package:chat_test_app/features/chat/presentation/widgets/date_separator.dart';
 import 'package:chat_test_app/features/chat/presentation/widgets/message_bubble.dart';
+import 'package:chat_test_app/features/chat/presentation/widgets/message_input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/theme/app_colors.dart';
@@ -47,10 +49,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    chat.name,
-                    style: AppTextStyles.name,
-                  ),
+                  Text(chat.name, style: AppTextStyles.name),
                   const Text("В сети", style: AppTextStyles.status),
                 ],
               ),
@@ -67,17 +66,35 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
               Expanded(
                 child: ListView.builder(
                   controller: _scroll,
+                  reverse: true,
                   itemCount: chat.messages.length,
                   padding: const EdgeInsets.symmetric(
                     horizontal: 16,
                     vertical: 8,
                   ),
                   itemBuilder: (_, index) {
-                    final msg = chat.messages[index];
-                    return Column(children: [MessageBubble(msg: msg)]);
+                    final reversedIndex = chat.messages.length - 1 - index;
+                    final msg = chat.messages[reversedIndex];
+                    final prev = reversedIndex < chat.messages.length - 1
+                        ? chat.messages[reversedIndex + 1]
+                        : null;
+
+                    final showDate =
+                        prev == null ||
+                        prev.createdAt.day != msg.createdAt.day ||
+                        prev.createdAt.month != msg.createdAt.month ||
+                        prev.createdAt.year != msg.createdAt.year;
+
+                    return Column(
+                      children: [
+                        if (showDate) DateSeparator(date: msg.createdAt),
+                        MessageBubble(msg: msg),
+                      ],
+                    );
                   },
                 ),
               ),
+              MessageInput(chatId: widget.chatId),
             ],
           );
         },

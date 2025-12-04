@@ -7,12 +7,14 @@ final chatRepositoryProvider = Provider((ref) {
 });
 
 final chatProvider = FutureProvider.family<Chat, String>((ref, chatId) {
-  return ref.watch(chatRepositoryProvider).getChat(chatId);
+  final repo = ref.watch(chatRepositoryProvider);
+  return repo.getChat(chatId);
 });
 
 final sendMessageProvider =
 FutureProvider.family<void, (String chatId, String text)>((ref, args) {
   final (chatId, text) = args;
-  ref.read(chatRepositoryProvider).sendMessage(chatId, text);
+  final repo = ref.watch(chatRepositoryProvider);
+  repo.sendMessage(chatId, text);
   ref.invalidate(chatProvider(chatId));
 });

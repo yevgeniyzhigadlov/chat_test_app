@@ -69,7 +69,7 @@ class ChatListScreen extends ConsumerWidget {
                 error: (e, _) => Center(child: Text('Ошибка загрузки')),
                 data: (chats) => ListView.separated(
                   itemCount: chats.length,
-                  separatorBuilder: (_, __) => const Padding(
+                  separatorBuilder: (_, _) => const Padding(
                     padding: EdgeInsetsGeometry.symmetric(horizontal: 20),
                     child: MessageDivider(),
                   ),
