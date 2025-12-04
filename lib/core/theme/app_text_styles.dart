@@ -8,12 +8,6 @@ class AppTextStyles {
     color: AppColors.textPrimary,
   );
 
-  static const subtitle = TextStyle(
-    fontSize: 14,
-    fontWeight: FontWeight.w400,
-    color: AppColors.textSecondary,
-  );
-
   static const search = TextStyle(
     fontSize: 16,
     fontWeight: FontWeight.w500,
@@ -32,6 +26,12 @@ class AppTextStyles {
     color: AppColors.textPrimary,
   );
 
+  static const date = TextStyle(
+    fontSize: 12,
+    fontWeight: FontWeight.w500,
+    color: AppColors.textSecondary,
+  );
+
   static const avatar = TextStyle(
     fontSize: 20,
     fontWeight: FontWeight.w700,
@@ -39,12 +39,6 @@ class AppTextStyles {
   );
 
   static const status = TextStyle(
-    fontSize: 12,
-    fontWeight: FontWeight.w500,
-    color: AppColors.textSecondary,
-  );
-
-  static const date = TextStyle(
     fontSize: 12,
     fontWeight: FontWeight.w500,
     color: AppColors.textSecondary,
@@ -60,12 +54,6 @@ class AppTextStyles {
     fontSize: 14,
     fontWeight: FontWeight.w500,
     color: AppColors.textPrimary,
-  );
-
-  static const messageDate = TextStyle(
-    fontSize: 12,
-    fontWeight: FontWeight.w500,
-    color: AppColors.textSecondary,
   );
 
   static const messageInput = TextStyle(

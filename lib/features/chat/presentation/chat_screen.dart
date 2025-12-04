@@ -74,21 +74,21 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                   ),
                   itemBuilder: (_, index) {
                     final reversedIndex = chat.messages.length - 1 - index;
-                    final msg = chat.messages[reversedIndex];
+                    final message = chat.messages[reversedIndex];
                     final prev = reversedIndex < chat.messages.length - 1
                         ? chat.messages[reversedIndex + 1]
                         : null;
 
                     final showDate =
                         prev == null ||
-                        prev.createdAt.day != msg.createdAt.day ||
-                        prev.createdAt.month != msg.createdAt.month ||
-                        prev.createdAt.year != msg.createdAt.year;
+                        prev.createdAt.day != message.createdAt.day ||
+                        prev.createdAt.month != message.createdAt.month ||
+                        prev.createdAt.year != message.createdAt.year;
 
                     return Column(
                       children: [
-                        if (showDate) DateSeparator(date: msg.createdAt),
-                        MessageBubble(msg: msg),
+                        if (showDate) DateSeparator(date: message.createdAt),
+                        MessageBubble(message: message),
                       ],
                     );
                   },

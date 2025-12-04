@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Message {
 
- String get id; String get text; DateTime get createdAt; bool get isMe;
+ String get id; String get text; DateTime get createdAt; bool get isMe; MessageStatus get status;
 /// Create a copy of Message
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $MessageCopyWith<Message> get copyWith => _$MessageCopyWithImpl<Message>(this as
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Message&&(identical(other.id, id) || other.id == id)&&(identical(other.text, text) || other.text == text)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.isMe, isMe) || other.isMe == isMe));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Message&&(identical(other.id, id) || other.id == id)&&(identical(other.text, text) || other.text == text)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.isMe, isMe) || other.isMe == isMe)&&(identical(other.status, status) || other.status == status));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,text,createdAt,isMe);
+int get hashCode => Object.hash(runtimeType,id,text,createdAt,isMe,status);
 
 @override
 String toString() {
-  return 'Message(id: $id, text: $text, createdAt: $createdAt, isMe: $isMe)';
+  return 'Message(id: $id, text: $text, createdAt: $createdAt, isMe: $isMe, status: $status)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $MessageCopyWith<$Res>  {
   factory $MessageCopyWith(Message value, $Res Function(Message) _then) = _$MessageCopyWithImpl;
 @useResult
 $Res call({
- String id, String text, DateTime createdAt, bool isMe
+ String id, String text, DateTime createdAt, bool isMe, MessageStatus status
 });
 
 
@@ -62,13 +62,14 @@ class _$MessageCopyWithImpl<$Res>
 
 /// Create a copy of Message
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? text = null,Object? createdAt = null,Object? isMe = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? text = null,Object? createdAt = null,Object? isMe = null,Object? status = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,text: null == text ? _self.text : text // ignore: cast_nullable_to_non_nullable
 as String,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as DateTime,isMe: null == isMe ? _self.isMe : isMe // ignore: cast_nullable_to_non_nullable
-as bool,
+as bool,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
+as MessageStatus,
   ));
 }
 
@@ -153,10 +154,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String text,  DateTime createdAt,  bool isMe)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String text,  DateTime createdAt,  bool isMe,  MessageStatus status)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Message() when $default != null:
-return $default(_that.id,_that.text,_that.createdAt,_that.isMe);case _:
+return $default(_that.id,_that.text,_that.createdAt,_that.isMe,_that.status);case _:
   return orElse();
 
 }
@@ -174,10 +175,10 @@ return $default(_that.id,_that.text,_that.createdAt,_that.isMe);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String text,  DateTime createdAt,  bool isMe)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String text,  DateTime createdAt,  bool isMe,  MessageStatus status)  $default,) {final _that = this;
 switch (_that) {
 case _Message():
-return $default(_that.id,_that.text,_that.createdAt,_that.isMe);case _:
+return $default(_that.id,_that.text,_that.createdAt,_that.isMe,_that.status);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -194,10 +195,10 @@ return $default(_that.id,_that.text,_that.createdAt,_that.isMe);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String text,  DateTime createdAt,  bool isMe)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String text,  DateTime createdAt,  bool isMe,  MessageStatus status)?  $default,) {final _that = this;
 switch (_that) {
 case _Message() when $default != null:
-return $default(_that.id,_that.text,_that.createdAt,_that.isMe);case _:
+return $default(_that.id,_that.text,_that.createdAt,_that.isMe,_that.status);case _:
   return null;
 
 }
@@ -209,13 +210,14 @@ return $default(_that.id,_that.text,_that.createdAt,_that.isMe);case _:
 
 
 class _Message implements Message {
-  const _Message({required this.id, required this.text, required this.createdAt, required this.isMe});
+  const _Message({required this.id, required this.text, required this.createdAt, required this.isMe, required this.status});
   
 
 @override final  String id;
 @override final  String text;
 @override final  DateTime createdAt;
 @override final  bool isMe;
+@override final  MessageStatus status;
 
 /// Create a copy of Message
 /// with the given fields replaced by the non-null parameter values.
@@ -227,16 +229,16 @@ _$MessageCopyWith<_Message> get copyWith => __$MessageCopyWithImpl<_Message>(thi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Message&&(identical(other.id, id) || other.id == id)&&(identical(other.text, text) || other.text == text)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.isMe, isMe) || other.isMe == isMe));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Message&&(identical(other.id, id) || other.id == id)&&(identical(other.text, text) || other.text == text)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.isMe, isMe) || other.isMe == isMe)&&(identical(other.status, status) || other.status == status));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,text,createdAt,isMe);
+int get hashCode => Object.hash(runtimeType,id,text,createdAt,isMe,status);
 
 @override
 String toString() {
-  return 'Message(id: $id, text: $text, createdAt: $createdAt, isMe: $isMe)';
+  return 'Message(id: $id, text: $text, createdAt: $createdAt, isMe: $isMe, status: $status)';
 }
 
 
@@ -247,7 +249,7 @@ abstract mixin class _$MessageCopyWith<$Res> implements $MessageCopyWith<$Res> {
   factory _$MessageCopyWith(_Message value, $Res Function(_Message) _then) = __$MessageCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String text, DateTime createdAt, bool isMe
+ String id, String text, DateTime createdAt, bool isMe, MessageStatus status
 });
 
 
@@ -264,13 +266,14 @@ class __$MessageCopyWithImpl<$Res>
 
 /// Create a copy of Message
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? text = null,Object? createdAt = null,Object? isMe = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? text = null,Object? createdAt = null,Object? isMe = null,Object? status = null,}) {
   return _then(_Message(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,text: null == text ? _self.text : text // ignore: cast_nullable_to_non_nullable
 as String,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as DateTime,isMe: null == isMe ? _self.isMe : isMe // ignore: cast_nullable_to_non_nullable
-as bool,
+as bool,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
+as MessageStatus,
   ));
 }
 

@@ -7,13 +7,22 @@ import '../../../../core/utils/date_formatter.dart';
 import '../../../../models/message.dart';
 
 class MessageBubble extends StatelessWidget {
-  final Message msg;
+  final Message message;
 
-  const MessageBubble({super.key, required this.msg});
+  const MessageBubble({super.key, required this.message});
+
+  Widget messageStatusIcon(MessageStatus status) {
+    switch (status) {
+      case MessageStatus.sent:
+        return SvgPicture.asset(AppAssets.messageSent, width: 12, height: 12);
+      case MessageStatus.read:
+        return SvgPicture.asset(AppAssets.messageRead, width: 12, height: 12);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    final isMe = msg.isMe;
+    final isMe = message.isMe;
 
     return Align(
       alignment: isMe ? Alignment.centerRight : Alignment.centerLeft,
@@ -47,12 +56,17 @@ class MessageBubble extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Text(msg.text, style: AppTextStyles.message),
+                Text(message.text, style: AppTextStyles.message),
                 const SizedBox(width: 15),
                 Text(
-                  DateFormatter.formatTime(msg.createdAt),
-                  style: AppTextStyles.messageDate,
+                  DateFormatter.formatTime(message.createdAt),
+                  style: AppTextStyles.date,
                 ),
+                if (isMe)
+                  Padding(
+                    padding: EdgeInsets.only(left: 4),
+                    child: messageStatusIcon(message.status),
+                  ),
               ],
             ),
           ),

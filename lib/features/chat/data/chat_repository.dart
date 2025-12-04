@@ -20,6 +20,7 @@ class ChatRepository {
       text: text,
       createdAt: DateTime.now(),
       isMe: true,
+      status: MessageStatus.sent
     );
 
     chatMocks[index] = chat.copyWith(messages: [...chat.messages, newMessage]);

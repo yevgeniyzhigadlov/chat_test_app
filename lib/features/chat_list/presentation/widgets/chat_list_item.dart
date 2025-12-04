@@ -35,11 +35,24 @@ class ChatListItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(chat.name, style: AppTextStyles.name),
-                  Text(
-                    lastMessage?.text ?? "",
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: AppTextStyles.subtitle,
+                  Row(
+                    children: [
+                      if (chat.lastMessage?.isMe == true)
+                        Text(
+                          "Вы: ",
+                          style: AppTextStyles.date.copyWith(
+                            color: AppColors.textPrimary,
+                          ),
+                        ),
+                      Expanded(
+                        child: Text(
+                          lastMessage?.text ?? "",
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: AppTextStyles.date,
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),

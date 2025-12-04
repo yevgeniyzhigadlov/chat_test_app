@@ -9,5 +9,8 @@ abstract class Message with _$Message {
     required String text,
     required DateTime createdAt,
     required bool isMe,
+    required MessageStatus status,
   }) = _Message;
 }
+
+enum MessageStatus { sent, read }
