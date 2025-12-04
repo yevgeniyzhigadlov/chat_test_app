@@ -4,7 +4,7 @@ import '../../../models/chat.dart';
 
 class ChatListRepository {
   Future<List<Chat>> getChats() async {
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(milliseconds: 500));
     return chatMocks;
   }
 }

@@ -6,17 +6,10 @@ final chatListRepositoryProvider = Provider((ref) {
   return ChatListRepository();
 });
 
-class ChatListNotifier extends AsyncNotifier<List<Chat>> {
-  @override
-  Future<List<Chat>> build() async {
-    final repo = ref.read(chatListRepositoryProvider);
-    return repo.getChats();
-  }
-}
-
-final chatListProvider = AsyncNotifierProvider<ChatListNotifier, List<Chat>>(
-  ChatListNotifier.new,
-);
+final chatListProvider = FutureProvider<List<Chat>>((ref) {
+  final repo = ref.watch(chatListRepositoryProvider);
+  return repo.getChats();
+});
 
 class SearchQueryNotifier extends Notifier<String> {
   @override
@@ -40,7 +33,7 @@ final filteredChatListProvider = Provider<AsyncValue<List<Chat>>>((ref) {
       final nameMatch = c.name.toLowerCase().contains(query);
 
       final messagesMatch = c.messages.any(
-        (m) => m.text.toLowerCase().contains(query),
+            (m) => m.text.toLowerCase().contains(query),
       );
 
       return nameMatch || messagesMatch;

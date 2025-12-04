@@ -4,7 +4,8 @@ import '../../../models/chat.dart';
 import '../../../models/message.dart';
 
 class ChatRepository {
-  Chat getChat(String chatId) {
+  Future<Chat> getChat(String chatId) async {
+    await Future.delayed(const Duration(milliseconds: 500));
     return chatMocks.firstWhere((c) => c.id == chatId);
   }
 

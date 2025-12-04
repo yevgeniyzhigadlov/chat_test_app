@@ -38,6 +38,12 @@ class AppTextStyles {
     color: AppColors.textAvatar,
   );
 
+  static const status = TextStyle(
+    fontSize: 12,
+    fontWeight: FontWeight.w500,
+    color: AppColors.textSecondary,
+  );
+
   static const date = TextStyle(
     fontSize: 12,
     fontWeight: FontWeight.w500,
@@ -54,6 +60,12 @@ class AppTextStyles {
     fontSize: 14,
     fontWeight: FontWeight.w500,
     color: AppColors.textPrimary,
+  );
+
+  static const messageDate = TextStyle(
+    fontSize: 12,
+    fontWeight: FontWeight.w500,
+    color: AppColors.textSecondary,
   );
 
   static const messageInput = TextStyle(

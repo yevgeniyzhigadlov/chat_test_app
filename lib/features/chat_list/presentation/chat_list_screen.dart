@@ -1,4 +1,4 @@
-import 'package:chat_test_app/features/chat_list/presentation/widgets/message_divider.dart';
+import 'package:chat_test_app/core/widgets/message_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -13,7 +13,7 @@ class ChatListScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final chats = ref.watch(filteredChatListProvider);
+    final chatsAsync = ref.watch(filteredChatListProvider);
     final search = ref.read(searchQueryProvider.notifier);
 
     return Scaffold(
@@ -64,7 +64,7 @@ class ChatListScreen extends ConsumerWidget {
             const MessageDivider(),
 
             Expanded(
-              child: chats.when(
+              child: chatsAsync.when(
                 loading: () => const Center(child: CircularProgressIndicator()),
                 error: (e, _) => Center(child: Text('Ошибка загрузки')),
                 data: (chats) => ListView.separated(
